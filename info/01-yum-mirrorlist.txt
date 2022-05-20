@@ -1,0 +1,12 @@
+ERROR:
+[root@294ebd3735bd /]# yum install which
+Failed to set locale, defaulting to C.UTF-8
+CentOS Linux 8 - AppStream                                                           153  B/s |  38  B     00:00
+Error: Failed to download metadata for repo 'appstream': Cannot prepare internal mirrorlist: No URLs in mirrorlist
+[root@294ebd3735bd /]#
+
+FIX: we need to install a repo/mirror list
+
+Or rather, switch to Fedora or CentOS Stream 8
+
+

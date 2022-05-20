@@ -1,0 +1,18 @@
+pulled latest may 20 2022
+
+[root@294ebd3735bd /]# cat /etc/centos-release
+CentOS Linux release 8.4.2105
+
+[root@294ebd3735bd /]# uname -a
+Linux 294ebd3735bd 5.10.104-linuxkit #1 SMP Thu Mar 17 17:08:06 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+
+[root@294ebd3735bd /]# cat /proc/sys/kernel/version
+#1 SMP Thu Mar 17 17:08:06 UTC 2022
+
+[root@294ebd3735bd /]# cat /proc/sys/kernel/osrelease
+5.10.104-linuxkit
+
+[root@294ebd3735bd /]# cat /proc/version
+Linux version 5.10.104-linuxkit (root@buildkitsandbox) (gcc (Alpine 10.2.1_pre1) 10.2.1 20201203, GNU ld (GNU Binutils) 2.35.2) #1 SMP Thu Mar 17 17:08:06 UTC 2022
+
+
