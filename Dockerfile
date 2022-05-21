@@ -72,6 +72,7 @@ RUN git --version
 # 0 upgraded, 53 newly installed, 0 to remove and 10 not upgraded.
 # Adds: 105 MB
 
+# NOTE: git is required to install Pyenv
 
 
 ####################################################################################################
@@ -132,7 +133,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 # dependency. This adds additional package repository management commands, among other things.
 RUN apt-get -y install software-properties-common
 
-
 # Installs packages:  dbus dbus-user-session dconf-gsettings-backend dconf-service dirmngr
 #   distro-info-data dmsetup gir1.2-glib-2.0 gir1.2-packagekitglib-1.0
 #   glib-networking glib-networking-common glib-networking-services gnupg
@@ -172,19 +172,40 @@ RUN lsb_release -a
 # Install 'psql', the Postgres command-line client, for administering the PostgreSQL DB.
 RUN apt-get -y install postgresql-client
 RUN psql --version
-# psql (PostgreSQL) 12.4 (Ubuntu 12.4-0ubuntu0.20.04.1)
+# psql (PostgreSQL) 12.10 (Ubuntu 12.10-0ubuntu0.20.04.1)
 
-
-
-
-####################################################################################################
-
-
-
+# Installs packages:  libpq5 postgresql-client postgresql-client-12 postgresql-client-common
+# 0 upgraded, 4 newly installed, 0 to remove and 9 not upgraded.
+# Adds: 4436 kB
 
 ####################################################################################################
 
+# OLD.
+# This would be a good place to install Python, but as of Ubuntu 20.04, Python is now included.
+# Here we create a symlink so that the command 'python' will invoke this included Python 3.8.
+#RUN ln -s /usr/bin/python3.8 /usr/bin/python
 
+
+####################################################################################################
+# pyenv
+# This is a source install involving many steps, beginning with cloning the repository.
+RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+# Pre-pend the path to Pyenv's bin onto the front of $PATH.
+# This will cause Pyenv shim-controlled Python versions to override any other Python installations.
+RUN echo '' >> ~/.profile;
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then' >> ~/.profile
+RUN echo '  eval "$(pyenv init -)"' >> ~/.profile
+RUN echo 'fi' >> ~/.profile
+RUN echo '' >> ~/.profile
+# Apply this change.
+#RUN source ~/.profile
+RUN which pyenv
+RUN pyenv -v
+# pyenv 2.3.0-11-ge676fde9
+
+# Adds: 12 MB
 
 
 ####################################################################################################

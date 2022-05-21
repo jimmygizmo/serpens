@@ -45,5 +45,69 @@ bookworm/sid
 
 
 
+===========================================================================================================
+===========================================================================================================
+Python Survey. It appears that Python, which was not present in the base Ubuntu image was installed
+by software-properties-common.
+
+root@931656dfcae3:/# which python
+root@931656dfcae3:/# which python2
+root@931656dfcae3:/# which python3
+/usr/bin/python3
+
+*** No python. No python2. Good reasons for a whole new install .. and with Pyenv.
+
+/usr/bin
+-rwxr-xr-x 1 root root       7813 Mar 13  2020  py3clean
+-rwxr-xr-x 1 root root      12120 Mar 13  2020  py3compile
+lrwxrwxrwx 1 root root         31 Mar 13  2020  py3versions -> ../share/python3/py3versions.py
+lrwxrwxrwx 1 root root          8 Mar 13  2020  pydoc3 -> pydoc3.8
+-rwxr-xr-x 1 root root         79 Mar 15 12:22  pydoc3.8
+lrwxrwxrwx 1 root root         12 Mar 13  2020  pygettext3 -> pygettext3.8
+-rwxr-xr-x 1 root root      21535 Mar 15 12:22  pygettext3.8
+lrwxrwxrwx 1 root root          9 Mar 13  2020  python3 -> python3.8
+-rwxr-xr-x 1 root root    5490448 Mar 15 12:22  python3.8
+
+root@931656dfcae3:/# python3 -V
+Python 3.8.10
+
+*** NO PIP! We would have to install it, but Pyenv will give us a pip with each Python we use anyhow.
+
+*** We could remove this Python, but will leave it for now.
+Pyenv should override it via PATH/shims.
+
+Trying:
+https://linuxtut.com/en/198211e84f8e0e9a5c18/
+
+
+
+===========================================================================================================
+===========================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+============================
+of interest for postgres:
+/usr/bin
+lrwxrwxrwx 1 root root         37 Aug 24  2020  pg_basebackup -> ../share/postgresql-common/pg_wrapper
+lrwxrwxrwx 1 root root         37 Aug 24  2020  pg_dump -> ../share/postgresql-common/pg_wrapper
+lrwxrwxrwx 1 root root         37 Aug 24  2020  pg_dumpall -> ../share/postgresql-common/pg_wrapper
+lrwxrwxrwx 1 root root         37 Aug 24  2020  pg_isready -> ../share/postgresql-common/pg_wrapper
+lrwxrwxrwx 1 root root         37 Aug 24  2020  pg_receivewal -> ../share/postgresql-common/pg_wrapper
+lrwxrwxrwx 1 root root         37 Aug 24  2020  pg_receivexlog -> ../share/postgresql-common/pg_wrapper
+lrwxrwxrwx 1 root root         37 Aug 24  2020  pg_recvlogical -> ../share/postgresql-common/pg_wrapper
+lrwxrwxrwx 1 root root         37 Aug 24  2020  pg_restore -> ../share/postgresql-common/pg_wrapper
 
 
