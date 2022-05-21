@@ -1,5 +1,11 @@
-https://hub.docker.com/layers/centos/library/centos/8.4.2105/images/sha256-65a4aad1156d8a0679537cb78519a17eb7142e05a968b26a5361153006224fdc?context=explore
+https://hub.docker.com/layers/ubuntu/library/ubuntu/22.04/images/sha256-8e01a1e915645f9240d02ab90cc15da706b4dee508025785dd0538bb3fc7f859?context=explore
 
-80.05 MB (documented)  TODO: Measure it and update.
+Size shown on Docker Hub:
+27.06 MB
+
+TODO: Measure it and update. Also measure after installs and note so
+sizes can be shown during trimming later.
+
+
 
 

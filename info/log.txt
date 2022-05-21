@@ -1,18 +1,49 @@
-pulled latest may 20 2022
+pulled ubuntu:latest may 20 2022
 
-[root@294ebd3735bd /]# cat /etc/centos-release
-CentOS Linux release 8.4.2105
+==========================================================================================================
+root@f13e77d65497:/# uname -a
+Linux f13e77d65497 5.10.104-linuxkit #1 SMP Thu Mar 17 17:08:06 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 
-[root@294ebd3735bd /]# uname -a
-Linux 294ebd3735bd 5.10.104-linuxkit #1 SMP Thu Mar 17 17:08:06 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 
-[root@294ebd3735bd /]# cat /proc/sys/kernel/version
+==========================================================================================================
+root@f13e77d65497:/# cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+
+
+===========================================================================================================
+root@f13e77d65497:/# cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=22.04
+DISTRIB_CODENAME=jammy
+DISTRIB_DESCRIPTION="Ubuntu 22.04 LTS"
+
+
+===========================================================================================================
+root@f13e77d65497:/# cat /proc/version
+Linux version 5.10.104-linuxkit (root@buildkitsandbox) (gcc (Alpine 10.2.1_pre1) 10.2.1 20201203, GNU ld (GNU Binutils) 2.35.2) #1 SMP Thu Mar 17 17:08:06 UTC 2022
+
+
+===========================================================================================================
+root@f13e77d65497:/# cat /proc/sys/kernel/version
 #1 SMP Thu Mar 17 17:08:06 UTC 2022
 
-[root@294ebd3735bd /]# cat /proc/sys/kernel/osrelease
-5.10.104-linuxkit
 
-[root@294ebd3735bd /]# cat /proc/version
-Linux version 5.10.104-linuxkit (root@buildkitsandbox) (gcc (Alpine 10.2.1_pre1) 10.2.1 20201203, GNU ld (GNU Binutils) 2.35.2) #1 SMP Thu Mar 17 17:08:06 UTC 2022
+===========================================================================================================
+root@f13e77d65497:/# cat /etc/debian_version
+bookworm/sid
+
+
+
 
 
