@@ -192,18 +192,37 @@ RUN psql --version
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 # Pre-pend the path to Pyenv's bin onto the front of $PATH.
 # This will cause Pyenv shim-controlled Python versions to override any other Python installations.
-RUN echo '' >> ~/.profile;
-RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
-RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
-RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then' >> ~/.profile
-RUN echo '  eval "$(pyenv init -)"' >> ~/.profile
-RUN echo 'fi' >> ~/.profile
-RUN echo '' >> ~/.profile
-# Apply this change.
-#RUN source ~/.profile
+#### RUN echo '' >> ~/.profile;
+#### RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+#### RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+#### RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then' >> ~/.profile
+#### RUN echo '  eval "$(pyenv init -)"' >> ~/.profile
+#### RUN echo 'fi' >> ~/.profile
+#### RUN echo '' >> ~/.profile
+RUN echo '' >> ~/.bashrc;
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then' >> ~/.bashrc
+RUN echo '  eval "$(pyenv init -)"' >> ~/.bashrc
+RUN echo 'fi' >> ~/.bashrc
+RUN echo '' >> ~/.bashrc
+# Apply the above changes.
+# The following source does not work. Root has issues sourcing such files.
+######### RUN source ~/.profile
+RUN source ~/.bashrc
+# But this should work. The -l option creates a new login shell for root, hence the desired sourcing.
+RUN su -l
 RUN which pyenv
+# TODO: STILL NO RESOLUTION TO THE PROBLEM OF ROOT NOT BEING ABLE TO SOURCE .profile OR .bashrc
 RUN pyenv -v
 # pyenv 2.3.0-11-ge676fde9
+RUN pyenv versions
+# * system (set by /root/.pyenv/version)  -  Correctly shows we have not installed any additional yet.
+
+# Show the current state of Python binaries. This will show only the Python 3 which was installed
+# with software-properties-common
+# python and python2 do not currently exist and there is no pip at all. (Known by inspecting image.)
+RUN python3 -V
 
 # Adds: 12 MB
 

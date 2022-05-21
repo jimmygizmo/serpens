@@ -1,0 +1,12 @@
+FROM:
+https://linuxtut.com/en/198211e84f8e0e9a5c18/
+
+Compare to MacOS. This is done at the end of .zshrc:
+# Initialize Pyenv
+eval "$(pyenv init -)"
+# Initialize Pyenv-Virtualenv
+eval "$(pyenv virtualenv-init -)"
+
+
+
+
