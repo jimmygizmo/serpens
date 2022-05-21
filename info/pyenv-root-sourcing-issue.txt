@@ -1,0 +1,37 @@
+Root does not pick up the environment like regular users and so the normal Pyenv installation
+process is hitting a very small snag at the end when it is needed to 'source' the .profile
+script of the user to pick up and run a few small lines added there.
+This is to 'init' Pyenv.
+
+As the root user in the Docker context, this is the error we hit when trying"
+source ~/.bashrc
+
+I have tried using .bashrc. Same results as using .profile. (root has both by default on this Ubuntu)
+root@e4ac5b75f1fa:/# ls -alt /root/
+total 24
+drwxr-xr-x 1 root root 4096 May 21 19:16 .pyenv
+drwxr-xr-x 1 root root 4096 May 21 19:16 ..
+-rw-r--r-- 1 root root 3248 May 21 13:54 .bashrc
+drwx------ 1 root root 4096 May 21 13:29 .
+-rw-r--r-- 1 root root  161 Dec  5  2019 .profile
+
+And notice we installed Pyenv into ~/.pyenv which is standard although it is usally for a normal
+user, not root in a container.
+
+Making the additions and the sourcing either gave the same error.
+
+su -l did not work for picking up the changes either.
+
+Next trying direct execution of the command within the conditional, but not sure this will work.
+If it does work initially, then I'm not sure it will work for all possible scenarios within
+then container, if for instance a new shell was spawned. But it is worth a try.
+
+Trying manual execution to init Pyenv like this:
+eval "$(pyenv init -)"
+======================================================================
+UPDATE: Actually, when using .bashrc, a NEW SHELL DOES HAVE WORKING PYENV. EXTERNAL SHELL FROM DOCKER RUN.
+The failure is during the build.
+TODO: Validate this finding using .profile and see if it is same/different.
+
+
+
