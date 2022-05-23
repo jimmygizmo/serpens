@@ -192,26 +192,39 @@ RUN psql --version
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 # Pre-pend the path to Pyenv's bin onto the front of $PATH.
 # This will cause Pyenv shim-controlled Python versions to override any other Python installations.
-#### RUN echo '' >> ~/.profile;
-#### RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
-#### RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
-#### RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then' >> ~/.profile
-#### RUN echo '  eval "$(pyenv init -)"' >> ~/.profile
-#### RUN echo 'fi' >> ~/.profile
-#### RUN echo '' >> ~/.profile
-RUN echo '' >> ~/.bashrc;
-RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then' >> ~/.bashrc
-RUN echo '  eval "$(pyenv init -)"' >> ~/.bashrc
-RUN echo 'fi' >> ~/.bashrc
-RUN echo '' >> ~/.bashrc
+
+RUN echo '' >> ~/.profile;
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then' >> ~/.profile
+RUN echo '  eval "$(pyenv init -)"' >> ~/.profile
+RUN echo 'fi' >> ~/.profile
+RUN echo '' >> ~/.profile
+
+# RUN echo '' >> ~/.bashrc;
+# RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+# RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+# RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then' >> ~/.bashrc
+# RUN echo '  eval "$(pyenv init -)"' >> ~/.bashrc
+# RUN echo 'fi' >> ~/.bashrc
+# RUN echo '' >> ~/.bashrc
+
 # Apply the above changes.
 # The following source does not work. Root has issues sourcing such files.
-######### RUN source ~/.profile
-RUN source ~/.bashrc
+##### DISABLED FOR NOW AS THIS BREAKS THE BUILD AS DOES BASHRC VERSION #####  RUN source ~/.profile
+# RUN source ~/.bashrc
+
+# TEST:
+#### DID NOT WORK #### RUN eval "$(pyenv init -)"
+#### RUN exec "$SHELL"  -- ERROR: Permission Denied
+
+# exec "/bin/bash" does not error at all, and we have 'which' but there is no active 'pyenv'
+#### RUN exec "/bin/bash"
+
+
 # But this should work. The -l option creates a new login shell for root, hence the desired sourcing.
-RUN su -l
+##### DISABLE FOR ABOVE TEST #####  RUN su -l
+
 RUN which pyenv
 # TODO: STILL NO RESOLUTION TO THE PROBLEM OF ROOT NOT BEING ABLE TO SOURCE .profile OR .bashrc
 RUN pyenv -v

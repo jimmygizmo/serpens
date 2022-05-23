@@ -33,5 +33,44 @@ UPDATE: Actually, when using .bashrc, a NEW SHELL DOES HAVE WORKING PYENV. EXTER
 The failure is during the build.
 TODO: Validate this finding using .profile and see if it is same/different.
 
+UPDATE: This DOES NOT WORK for .profile. A new external shell via Docker run -it /bin/bash does NOT
+have working pyenv command.
+
+Now that we have established this, lets do the above test, which is a little unrelated from those
+files. Lets just see how far we get in the build shell for now.
+
+=====================================================================
+
+Another method to try:
+root@ubuntu:~# exec "$SHELL"
+
+* Required this format: exec "/bin/bash" .. got Perm Denied using the $SHELL var. Security thing prob.
+BUT it did not error, but it did not work to get pyenv activate either.
+:(
+
+======================================================================
+ALTERNATE strategy to consider. Use a dedicated user for Python. A very reasonbable concept.
+https://gist.github.com/jprjr/7667947
+
+AHA! One of the comment posts has a version for root! We can try this first.
+
+FROM debian:buster-slim
+
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+RUN apt-get install -y mecab-ipadic-utf8
+
+ENV HOME="/root"
+
+WORKDIR $HOME
+RUN apt-get install -y git
+RUN git clone --depth=1 https://github.com/pyenv/pyenv.git .pyenv
+
+ENV PYENV_ROOT="$HOME/.pyenv"
+ENV PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
+RUN pyenv install 3.8.6
+RUN pyenv global 3.8.6
+
+=================================================================================
 
 
