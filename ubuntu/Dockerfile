@@ -4,9 +4,11 @@
 ####################################################################################################
 
 FROM ubuntu:20.04
+# TODO: add size
 
 ####################################################################################################
 # Show OS details.
+# TODO: Add output. Eliminate any redundant commands.
 RUN cat /etc/os-release
 RUN cat /etc/lsb-release
 RUN cat /etc/debian_version

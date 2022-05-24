@@ -1,0 +1,20 @@
+interesing sidenote:
+dmesg - what use has it from within a container? Anyhow on this CentOS, it seems there is a setting
+preventing access.
+
+[root@d74eeaa1b0ec /]# dmesg
+dmesg: read kernel buffer failed: Operation not permitted
+[root@d74eeaa1b0ec /]# cat /proc/sys/kernel/dmesg_restrict
+1
+
+If access is given, it might be showing info for the parent host, not the container, which is
+reported as common. This is an area to learn more about
+
+------------------------------------------------------------
+
+
+
+
+
+
+
