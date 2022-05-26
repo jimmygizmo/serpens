@@ -184,6 +184,7 @@ RUN psql --version
 
 # OLD.
 # This would be a good place to install Python, but as of Ubuntu 20.04, Python is now included.
+# (Specifically, it is now installed as part of software-properties-common.)
 # Here we create a symlink so that the command 'python' will invoke this included Python 3.8.
 #RUN ln -s /usr/bin/python3.8 /usr/bin/python
 

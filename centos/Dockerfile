@@ -97,23 +97,138 @@ RUN yum -y install sysstat
 RUN iostat -V
 # sysstat version 10.1.5
 
-# ?????
-# Installs packages:  cron libsensors-config libsensors5 sysstat ucf
-# 0 upgraded, 5 newly installed, 0 to remove and 10 not upgraded.
-# Adds: 2118 kB
-
 # Installed packages:  sysstat.x86_64 0:10.1.5-19.el7    and dependencies:
 #   cronie.x86_64 0:1.4.11-24.el7_9                    cronie-anacron.x86_64 0:1.4.11-24.el7_9
 #   crontabs.noarch 0:1.11-6.20121102git.el7
 #   lm_sensors-libs.x86_64 0:3.4.0-8.20160601gitf9185e5.el7 systemd-sysv.x86_64 0:219-78.el7_9.5
+# Adds: 1.4 MB
 
 
 ####################################################################################################
 
 
 
+####################################################################################################
+# Install libraries and SDKs for building
+####################################################################################################
+
+
 
 ####################################################################################################
+# Development Tools
+RUN yum -y groupinstall "Development Tools"
+
+# Installed:  autoconf.noarch 0:2.69-11.el7
+#   automake.noarch 0:1.13.4-3.el7
+#   bison.x86_64 0:3.0.4-2.el7
+#   byacc.x86_64 0:1.9.20130304-3.el7
+#   cscope.x86_64 0:15.8-10.el7
+#   ctags.x86_64 0:5.8-13.el7
+#   diffstat.x86_64 0:1.57-4.el7
+#   doxygen.x86_64 1:1.8.5-4.el7
+#   elfutils.x86_64 0:0.176-5.el7
+#   flex.x86_64 0:2.5.37-6.el7
+#   gcc.x86_64 0:4.8.5-44.el7
+#   gcc-c++.x86_64 0:4.8.5-44.el7
+#   gcc-gfortran.x86_64 0:4.8.5-44.el7
+#   gettext.x86_64 0:0.19.8.1-3.el7
+#   indent.x86_64 0:2.2.11-13.el7
+#   intltool.noarch 0:0.50.2-7.el7
+#   libtool.x86_64 0:2.4.2-22.el7_3
+#   make.x86_64 1:3.82-24.el7
+#   patch.x86_64 0:2.7.1-12.el7_7
+#   patchutils.x86_64 0:0.3.3-5.el7_9
+#   rcs.x86_64 0:5.9.0-7.el7
+#   redhat-rpm-config.noarch 0:9.1.0-88.el7.centos
+#   rpm-build.x86_64 0:4.11.3-48.el7_9
+#   rpm-sign.x86_64 0:4.11.3-48.el7_9
+#   subversion.x86_64 0:1.7.14-16.el7
+#   swig.x86_64 0:2.0.10-5.el7
+#   systemtap.x86_64 0:4.0-13.el7
+# Dependencies Installed:
+#   apr.x86_64 0:1.4.8-7.el7
+#   apr-util.x86_64 0:1.5.2-6.el7
+#   avahi-libs.x86_64 0:0.6.31-20.el7
+#   boost-date-time.x86_64 0:1.53.0-28.el7
+#   boost-system.x86_64 0:1.53.0-28.el7
+#   boost-thread.x86_64 0:1.53.0-28.el7
+#   bzip2.x86_64 0:1.0.6-13.el7
+#   cpp.x86_64 0:4.8.5-44.el7
+#   dwz.x86_64 0:0.11-3.el7
+#   dyninst.x86_64 0:9.3.1-3.el7
+#   efivar-libs.x86_64 0:36-12.el7
+#   emacs-filesystem.noarch 1:24.3-23.el7
+#   file.x86_64 0:5.11-37.el7
+#   gdb.x86_64 0:7.6.1-120.el7
+#   gettext-common-devel.noarch 0:0.19.8.1-3.el7
+#   gettext-devel.x86_64 0:0.19.8.1-3.el7
+#   gettext-libs.x86_64 0:0.19.8.1-3.el7
+#   glibc-devel.x86_64 0:2.17-326.el7_9
+#   glibc-headers.x86_64 0:2.17-326.el7_9
+#   gnutls.x86_64 0:3.3.29-9.el7_6
+#   kernel-debug-devel.x86_64 0:3.10.0-1160.66.1.el7
+#   kernel-headers.x86_64 0:3.10.0-1160.66.1.el7
+#   libcroco.x86_64 0:0.6.12-6.el7_9
+#   libdwarf.x86_64 0:20130207-4.el7
+#   libgfortran.x86_64 0:4.8.5-44.el7
+#   libgomp.x86_64 0:4.8.5-44.el7
+#   libmodman.x86_64 0:2.0.1-8.el7
+#   libmpc.x86_64 0:1.0.1-3.el7
+#   libproxy.x86_64 0:0.4.11-11.el7
+#   libquadmath.x86_64 0:4.8.5-44.el7
+#   libquadmath-devel.x86_64 0:4.8.5-44.el7
+#   libstdc++-devel.x86_64 0:4.8.5-44.el7
+#   libunistring.x86_64 0:0.9.3-9.el7
+#   m4.x86_64 0:1.4.16-10.el7
+#   mokutil.x86_64 0:15-8.el7
+#   mpfr.x86_64 0:3.1.1-4.el7
+#   neon.x86_64 0:0.30.0-4.el7
+#   nettle.x86_64 0:2.7.1-9.el7_9
+#   pakchois.x86_64 0:0.4-10.el7
+#   perl-Data-Dumper.x86_64 0:2.145-3.el7
+#   perl-Test-Harness.noarch 0:3.28-3.el7
+#   perl-Thread-Queue.noarch 0:3.02-2.el7
+#   perl-XML-Parser.x86_64 0:2.41-10.el7
+#   perl-srpm-macros.noarch 0:1-8.el7
+#   python-srpm-macros.noarch 0:3-34.el7
+#   subversion-libs.x86_64 0:1.7.14-16.el7
+#   systemtap-client.x86_64 0:4.0-13.el7
+#   systemtap-devel.x86_64 0:4.0-13.el7
+#   systemtap-runtime.x86_64 0:4.0-13.el7
+#   trousers.x86_64 0:0.3.14-2.el7
+#   unzip.x86_64 0:6.0-24.el7_9
+#   zip.x86_64 0:3.0-11.el7
+# Adds: 239 MB
+
+
+####################################################################################################
+# psql
+# Only the client is desired here, but the small install includes the server anyhow.
+
+# RUN yum -y install postgresql-libs.x86_64
+RUN yum -y install postgresql.x86_64
+RUN psql --version
+
+# Installed:  postgresql.x86_64 0:9.2.24-7.el7_9   and dependency:
+#   postgresql-libs.x86_64 0:9.2.24-7.el7_9
+# Adds: 17 MB
+
+
+####################################################################################################
+# pyenv
+# This is a source install involving many steps, beginning with cloning the repository.
+RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+# THIS PART OF THE INSTALLATION AND SETUP WILL NEED SOME WORK.
+# The situation is the same on Ubuntu. We will most likely need to use an application user instead
+# of root, which is best practice anyhow, even in containers. The problem with root is we cannot
+# get the changes to the environemnt to pick up and this activate Pyenv in any way documented or
+# that we have tried: source, ., su -, exec .. and not with .bashrc or .profile or other methods.
+# See notes in Ubuntu info directory and in the comments in the Ubuntu Serpens Dockerfile.
+
+
+
+
 
 
 
