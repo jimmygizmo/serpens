@@ -105,19 +105,32 @@ RUN iostat -V
 
 
 ####################################################################################################
+# ab - Apache Bench - (httpd-tools package)
+# ab is a good load/capactity-testing tool for generating rapid HTTP requests to web servers or
+# REST services and can be used for both dev and troubleshooting or testing when deployed. Since we
+# use Nginx, the other tools in this package are not of interest. We only need ab. Install is small.
+RUN yum -y install httpd-tools
+RUN ab -V
+# This is ApacheBench, Version 2.3
 
+# Installed packages:  httpd-tools.x86_64 0:2.4.6-97.el7.centos.5
+# Adds: 200k
 
 
 ####################################################################################################
-# Install libraries and SDKs for building
-####################################################################################################
 
+
+####################################################################################################
+# Install libraries and SDKs for building  -  [CentOS Serpens version]
+####################################################################################################
 
 
 ####################################################################################################
 # Development Tools
 RUN yum -y groupinstall "Development Tools"
 
+# TODO: All over this file I use the word 'Installed' here but I use 'Installs' in the
+# Ubuntu version. I think 'Installs' is best. Change all to that.
 # Installed:  autoconf.noarch 0:2.69-11.el7
 #   automake.noarch 0:1.13.4-3.el7
 #   bison.x86_64 0:3.0.4-2.el7

@@ -121,6 +121,27 @@ RUN iostat -V
 
 
 ####################################################################################################
+# ab - Apache Bench - (apache2-utils package)
+# ab is a good load/capactity-testing tool for generating rapid HTTP requests to web servers or
+# REST services and can be used for both dev and troubleshooting or testing when deployed. Since we
+# use Nginx, the other tools in this package are not of interest. We only need ab. Install is small.
+RUN apt-get -y install apache2-utils
+RUN ab -V
+# This is ApacheBench, Version 2.3
+
+# Installs packages:  apache2-utils libapr1 libaprutil1
+# Adds: 970 kB
+
+
+####################################################################################################
+
+
+####################################################################################################
+# Install libraries and SDKs for building  -  [Ubuntu Serpens version]
+####################################################################################################
+
+
+####################################################################################################
 # fix: tzdata installer
 # During the following install of 'software-properties-common', at the step to install 'tzdata'
 # the installer will stop for user input and thus break the build. This is the fix. 
